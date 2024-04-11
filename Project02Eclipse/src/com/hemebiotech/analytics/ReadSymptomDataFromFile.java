@@ -1,10 +1,13 @@
 package com.hemebiotech.analytics;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Simple brute force implementation
@@ -23,24 +26,23 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	}
 	
 	@Override
-	public List<String> GetSymptoms() {
-		ArrayList<String> result = new ArrayList<String>();
+	public Map<String,Integer> GetSymptoms() {
+		Map<String,Integer> result = new HashMap<String,Integer>();
 		
 		if (filepath != null) {
 			try {
-				BufferedReader reader = new BufferedReader (new FileReader(filepath));
-				String line = reader.readLine();
-				
-				while (line != null) {
-					result.add(line);
-					line = reader.readLine();
+				BufferedReader reader=new BufferedReader(new FileReader(filepath));
+				while (reader.ready()) {
+					String str=reader.readLine();
+					result.put(str,(result.containsKey(str))?result.get(str)+1:1);
 				}
 				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				System.out.println("inputfile not found");
+			} catch ( IOException e){
+				System.out.println("reading error chack if file is not corrupted and not used by others applications");
 			}
 		}
-		
 		return result;
 	}
 

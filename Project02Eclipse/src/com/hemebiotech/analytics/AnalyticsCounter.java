@@ -28,7 +28,7 @@ public class AnalyticsCounter {
 				}
 				reader.close();
 				Collections.sort(tabout);
-				tabout.stream().forEach(i->{res+= result.get(i) +" "+i+" found \n";});
+				tabout.stream().forEach(i->{res+= i +" "+i+" found \n";});
 				FileWriter writer = new FileWriter ("result.out");
 				writer.write(res);
 				writer.close();
