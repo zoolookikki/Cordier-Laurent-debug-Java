@@ -30,6 +30,5 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
         }catch(IOException e){
             System.out.println("writing "+filename+"failed");
         }
-        throw new UnsupportedOperationException("Unimplemented method 'writeSymptoms'");
     }
 }
