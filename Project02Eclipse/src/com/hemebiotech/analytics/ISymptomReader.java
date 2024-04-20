@@ -1,5 +1,6 @@
 package com.hemebiotech.analytics;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +17,17 @@ public interface ISymptomReader {
 	 * 
 	 * @return a raw listing of all Symptoms obtained from a data source, duplicates are possible/probable
 	 */
-	Map<String,Integer> GetSymptoms ();
+	List<String> getSymptoms();
+	/**
+	 * 
+	 * @param symptoms List of symptoms
+	 * @return Map containing each stmptom as key and it's count
+	 */
+	public Map<String, Integer> countSymptoms(List<String> symptoms);
+	/**
+	 * 
+	 * @param symptoms Unordered map containing each stmptom as key and it's count
+	 * @return ordered map containing each stmptom as key and it's count
+	 */
+	public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms);
 }
