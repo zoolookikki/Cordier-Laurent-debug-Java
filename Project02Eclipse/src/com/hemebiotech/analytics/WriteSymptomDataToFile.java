@@ -17,7 +17,7 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
     @Override
     public void writeSymptoms(Map<String, Integer> MapData) {
         
-        MapData.forEach((k,v)->{str+=k+" "+v+"found \n";});
+        MapData.forEach((k,v)->{str+=v+" "+k+" found \n";});
         try{
             FileWriter writer = new FileWriter ("result.out");
 			writer.write(str);

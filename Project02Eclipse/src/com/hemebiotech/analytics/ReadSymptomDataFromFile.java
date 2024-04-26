@@ -47,20 +47,10 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		}
 		return result;
 	}
-	@Override
-	public Map<String, Integer> countSymptoms(List<String> symptoms) {
-		Map<String,Integer> result=new HashMap<String,Integer>();
-		symptoms.stream().forEach(i->{
-			if(result.containsKey(i)){
-				result.put(i,result.get(i)+1);
-			}else{
-				result.put(i,1);
-			}
-		});
-		return result;
-	}
+	
+	
 
-	@Override
+	
 	public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms) {
 		Map<String,Integer> result=new LinkedHashMap<String,Integer>();
 		List<String> symptomsList=new LinkedList<>(symptoms.keySet());

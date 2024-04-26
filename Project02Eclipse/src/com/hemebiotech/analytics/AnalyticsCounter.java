@@ -8,21 +8,22 @@ import java.util.List;
 import java.util.Map;
 
 public class AnalyticsCounter {
-	static String res="";
-	public static void main(String args[]) throws Exception {
-		String filepath=args[0];
-		ISymptomReader ir=new ReadSymptomDataFromFile(filepath);
-		List<String> list=ir.getSymptoms();
-		
-		ISymptomWriter iw=new WriteSymptomDataToFile("result.out");
-		iw.writeSymptoms(sortSymptoms(countSymptoms(list)));
+	private ISymptomReader reader;
+	private ISymptomWriter writer;
+
+	public AnalyticsCounter(ISymptomReader reader,ISymptomWriter writer){
+		this.reader = reader;
+		this.writer = writer;
+	}
+
+	public List<String> getSymptoms(){
+		return reader.getSymptoms();
 	}
 	/**
-	 * 
 	 * @param symptoms Unordered map containing each stmptom as key and it's count
 	 * @return ordered map containing each stmptom as key and it's count
 	 */
-	public static Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms) {
+	public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms) {
 		Map<String,Integer> result=new LinkedHashMap<String,Integer>();
 		List<String> symptomsList=new LinkedList<>(symptoms.keySet());
 		Collections.sort(symptomsList);
@@ -37,7 +38,7 @@ public class AnalyticsCounter {
 	 * @param symptoms List of symptoms
 	 * @return Map containing each stmptom as key and it's count
 	 */
-	public static Map<String, Integer> countSymptoms(List<String> symptoms) {
+	public Map<String, Integer> countSymptoms(List<String> symptoms) {
 		Map<String,Integer> result=new HashMap<String,Integer>();
 		symptoms.stream().forEach(i->{
 			if(result.containsKey(i)){
@@ -47,5 +48,9 @@ public class AnalyticsCounter {
 			}
 		});
 		return result;
+	}
+	
+	public void writeSymptoms(Map<String,Integer> sortedSymptoms){
+		writer.writeSymptoms(sortedSymptoms);
 	}
 }
