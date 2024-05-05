@@ -1,5 +1,6 @@
 package com.hemebiotech.analytics;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ public class AnalyticsCounter {
 
 	ISymptomReader reader;
 	ISymptomWriter writer;
+	Map<String, Integer> symptomsMap = new HashMap<String, Integer>();
+	List<String> unsortedList = new ArrayList<String>();
 
 	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
 		this.reader = reader;
