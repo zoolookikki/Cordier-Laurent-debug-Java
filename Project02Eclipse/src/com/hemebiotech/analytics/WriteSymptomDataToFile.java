@@ -22,7 +22,7 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
 
 				String key = results.getKey();
 				Integer value = results.getValue();
-				String line = key +"    :"+value +"\n";
+				String line = key +" :"+value +"\n";
 				buffsympt.write(line);
 			}
 
