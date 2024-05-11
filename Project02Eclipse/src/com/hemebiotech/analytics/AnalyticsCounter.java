@@ -1,5 +1,7 @@
 package com.hemebiotech.analytics;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,53 +13,58 @@ public class AnalyticsCounter  {
 	public ISymptomWriter writer;
 	public ISymptomReader reader;
 
+
 	public AnalyticsCounter (ISymptomReader reader, ISymptomWriter writer) {
 
-		this.reader = new ReadSymptomDataFromFile("symptoms.txt");
+		this.reader = new ReadSymptomDataFromFile("C:\\Users\\emman\\git\\jurquet_emmanuel_debug_java\\Project02Eclipse\\symptoms.txt");
 		this.writer = new WriteSymptomDataToFile();
+
 
 	}
 
-	public List<String>GetSymptoms() {
+	public List<String>getSymptoms() {
 
-		List <String>result= reader.GetSymptoms();
-		System.out.println(result);
+		List <String>result= reader.getSymptoms();
+
 		return result;
 
 	}
-	public Map <String, Integer> countSymptoms (List<String> symptoms) {
+	public  Map <String, Integer> countSymptoms (List<String> symptoms) {
 
-		Map<String, Integer> countsympt =  new HashMap<String, Integer>();
+		reader = new ReadSymptomDataFromFile("C:\\Users\\emman\\git\\jurquet_emmanuel_debug_java\\Project02Eclipse\\symptoms.txt");
 
-		for (String symptom :symptoms) {
+		Map<String, Integer> countSymptoms =  new HashMap<String, Integer>();
+		symptoms = reader.getSymptoms();
 
-			if(countsympt.containsKey(symptom)) {
+		for (int i = 0; i <symptoms.size(); i++ ) {
 
-				countsympt.put(symptom, countsympt.get(symptom) + 1);
+			String symptom = symptoms.get(i).trim().toLowerCase();
+
+			if(countSymptoms.containsKey(symptom)) {
+
+				countSymptoms.put(symptom, countSymptoms.get(symptom) + 1);
 
 			}else {
-				countsympt.put(symptom,1);
+				countSymptoms.put(symptom,1);
 			}
 		}
 
-		return countsympt;
+		return countSymptoms;
 
 	}
-
-	public Map<String, Integer> sortSymptoms (Map<String,Integer> symptoms) {
-
-		Map<String, Integer> sortedSymptoms = new TreeMap<>(symptoms);
-		for (Map.Entry<String, Integer> mp :sortedSymptoms.entrySet()) {
-			sortedSymptoms.get(mp.getKey());
-			sortedSymptoms.get(mp.getValue());
-
-		}
-		return sortedSymptoms;
+	public Map<String, Integer> sortSymptoms (Map<String, Integer> symptoms){
+		
+		 return new TreeMap<>(symptoms);
 	}
-	public void writeSymptoms (Map<String, Integer> symptoms) {	
-		writer.writeSymptoms(symptoms);
+	public void writeSymptoms(Map<String, Integer> symptoms) {
+		
+        writer.writeSymptoms(symptoms);
 	}
 }
+
+
+
+
 
 
 
