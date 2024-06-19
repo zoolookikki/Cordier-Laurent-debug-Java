@@ -1,53 +1,103 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+/**
+ * 
+ */
 
 public class AnalyticsCounter {
 	
-	private static int headacheCount = 0;
-	private static int rashCount = 0;	
-	private static int pupilCount = 0;	
+	private static ISymptomReader reader;
+	private static ISymptomWriter writer;
 	
 	public static void main(String args[]) throws Exception {
 		
-		// first get input
-		BufferedReader reader = new BufferedReader (new FileReader("Project02Eclipse/symptoms.txt"));
-		String line = reader.readLine();
-
-		int i = 0;
-		int headCount = 0;
 		
-		while (line != null) {
+		
+	}
+	
+	/**
+	 * @param reader
+	 * @param writer
+	 */
+	
+	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
+		
+		AnalyticsCounter.reader = reader;
+		AnalyticsCounter.writer = writer;
+		
+	}
+	
+	/**
+	 * @param filename
+	 * @return
+	 */
+	
+	public static List<String> getSymptoms(){
+		
+		List<String> symptoms = reader.GetSymptoms();
+		
+		return symptoms;
+		
+	}
+	
+	/**
+	 * @param filename
+	 * @param symptoms
+	 */
+	
+	public static void writeSymptoms(Map<String,Integer> symptoms) {
+		
+		
+		writer.writeSymptoms(symptoms);
+		
+	}
+	
+	/**
+	 * @param symptoms
+	 * @return
+	 */
+	
+	public static Map<String,Integer> countSymptoms(List<String> symptoms) {
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		
+		for (String symptom : symptoms) {
 			
-			i++;
-			System.out.println("symptom from file: " + line);
-			
-			if (line.equals("headache")) {
+			if(symptom != null) {
 				
-				headCount++;
-				System.out.println("number of headaches: " + headCount);
+				if(!map.containsKey(symptom)) {
+					
+					map.put(symptom, 1);
+					
+				} else {
+					
+					map.put(symptom, map.get(symptom) + 1);
+					
+				}
 				
-			} else if (line.equals("rush")) {
-				
-				rashCount++;
-				
-			} else if (line.contains("pupils")) {
-				
-				pupilCount++;
 			}
-
-			line = reader.readLine();
+			
 		}
 		
-		// next generate output
-		FileWriter writer = new FileWriter ("result.out");
+		return map;
 		
-		writer.write("headache: " + headacheCount + "\n");
-		writer.write("rash: " + rashCount + "\n");
-		writer.write("dialated pupils: " + pupilCount + "\n");
-		writer.close();
+	}
+	
+	/**
+	 * @param symptoms
+	 * @return
+	 */
+	
+	public static Map<String,Integer> sortSymptoms(Map<String,Integer> symptoms) {
+		
+		Map<String,Integer> sortMap = new TreeMap<String,Integer>(symptoms);
+		
+		return sortMap;
 		
 	}
 	
