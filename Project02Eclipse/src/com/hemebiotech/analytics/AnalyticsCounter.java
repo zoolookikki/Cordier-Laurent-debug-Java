@@ -16,7 +16,8 @@ public class AnalyticsCounter {
 	
 	public static void main(String args[]) throws Exception {
 		
-		
+		Main execute = new Main();
+		execute.main();
 		
 	}
 	
@@ -29,6 +30,32 @@ public class AnalyticsCounter {
 		
 		AnalyticsCounter.reader = reader;
 		AnalyticsCounter.writer = writer;
+		
+	}
+	
+	public static class Main {
+		
+		/**
+		 * 
+		 */
+		
+		public void main(){
+			
+			String filepath =  "Project02Eclipse/symptoms.txt";
+			String filename = "result.out";
+			
+			reader = new ReadSymptomDataFromFile(filepath);
+			writer = new WriteSymptomeDataToFile(filename);
+					
+			List<String> symptoms = reader.GetSymptoms();
+			
+			Map<String,Integer> orderSymptoms = countSymptoms(symptoms);
+			
+			orderSymptoms = sortSymptoms(orderSymptoms);
+			
+			writeSymptoms(orderSymptoms);
+			
+		}
 		
 	}
 	
