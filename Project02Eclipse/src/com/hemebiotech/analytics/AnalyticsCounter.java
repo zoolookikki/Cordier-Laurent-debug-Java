@@ -6,7 +6,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * 
+ * The program is about to count a list of symptom from a file line per line
+ * That will order list of symptom in alphabetic order and write it in a file output
  */
 
 public class AnalyticsCounter {
@@ -14,33 +15,28 @@ public class AnalyticsCounter {
 	private static ISymptomReader reader;
 	private static ISymptomWriter writer;
 	
+	/**
+	 * Instancie the minor class Main which content the execution of the program
+	 */
 	public static void main(String args[]) throws Exception {
-		
 		Main execute = new Main();
 		execute.main();
-		
 	}
-	
 	/**
 	 * @param reader
 	 * @param writer
 	 */
-	
 	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
-		
 		AnalyticsCounter.reader = reader;
 		AnalyticsCounter.writer = writer;
-		
 	}
-	
+
 	public static class Main {
 		
 		/**
-		 * 
+		 * The main instructions of the program, call in the main method of AnalyticsCounter
 		 */
-		
 		public void main(){
-			
 			String filepath =  "Project02Eclipse/symptoms.txt";
 			String filename = "result.out";
 			
@@ -54,78 +50,53 @@ public class AnalyticsCounter {
 			orderSymptoms = sortSymptoms(orderSymptoms);
 			
 			writeSymptoms(orderSymptoms);
-			
 		}
-		
 	}
-	
 	/**
-	 * @param filename
-	 * @return
+	 * Call the method GetSymptoms from reader attribute 
+	 * @return a List variable of the symptoms
 	 */
-	
 	public static List<String> getSymptoms(){
-		
 		List<String> symptoms = reader.GetSymptoms();
 		
 		return symptoms;
-		
 	}
-	
 	/**
-	 * @param filename
-	 * @param symptoms
+	 * @param symptoms a Map variable with the count of symptoms
+	 * Call the method WriteSymptoms from writer attribute 
 	 */
-	
 	public static void writeSymptoms(Map<String,Integer> symptoms) {
-		
-		
-		writer.writeSymptoms(symptoms);
-		
+		writer.WriteSymptoms(symptoms);
 	}
-	
 	/**
-	 * @param symptoms
-	 * @return
+	 * @param symptoms a List variable with all the symptoms
+	 * 
+	 * Add a symptom in a Map variable from a List variable which content all symptoms
+	 * If the symptom already exist, add +1 at the value else add the symptom with 1 for starting value
+	 * 
+	 * @return a Map variable with all the symptoms counted
 	 */
-	
 	public static Map<String,Integer> countSymptoms(List<String> symptoms) {
-		
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		
 		for (String symptom : symptoms) {
-			
 			if(symptom != null) {
-				
 				if(!map.containsKey(symptom)) {
-					
 					map.put(symptom, 1);
-					
 				} else {
-					
 					map.put(symptom, map.get(symptom) + 1);
-					
 				}
-				
 			}
-			
 		}
-		
 		return map;
-		
 	}
-	
 	/**
-	 * @param symptoms
-	 * @return
+	 * @param symptoms Map of all symptoms counted
+	 * @return a Map variable with symptoms in alphabetic order
 	 */
-	
 	public static Map<String,Integer> sortSymptoms(Map<String,Integer> symptoms) {
-		
 		Map<String,Integer> sortMap = new TreeMap<String,Integer>(symptoms);
 		
 		return sortMap;
-		
 	}
-	
 }
