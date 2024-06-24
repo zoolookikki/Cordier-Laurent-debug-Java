@@ -5,23 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * The program is about to count a list of symptom from a file line per line
- * That will order list of symptom in alphabetic order and write it in a file output
- */
-
 public class AnalyticsCounter {
 	
 	private static ISymptomReader reader;
 	private static ISymptomWriter writer;
 	
-	/**
-	 * Instancie the minor class Main which content the execution of the program
-	 */
-	public static void main(String args[]) throws Exception {
-		Main execute = new Main();
-		execute.main();
-	}
 	/**
 	 * @param reader
 	 * @param writer
@@ -30,33 +18,11 @@ public class AnalyticsCounter {
 		AnalyticsCounter.reader = reader;
 		AnalyticsCounter.writer = writer;
 	}
-
-	public static class Main {
-		
-		/**
-		 * The main instructions of the program, call in the main method of AnalyticsCounter
-		 */
-		public void main(){
-			String filepath =  "Project02Eclipse/symptoms.txt";
-			String filename = "result.out";
-			
-			reader = new ReadSymptomDataFromFile(filepath);
-			writer = new WriteSymptomeDataToFile(filename);
-					
-			List<String> symptoms = reader.GetSymptoms();
-			
-			Map<String,Integer> orderSymptoms = countSymptoms(symptoms);
-			
-			orderSymptoms = sortSymptoms(orderSymptoms);
-			
-			writeSymptoms(orderSymptoms);
-		}
-	}
 	/**
 	 * Call the method GetSymptoms from reader attribute 
 	 * @return a List variable of the symptoms
 	 */
-	public static List<String> getSymptoms(){
+	public List<String> getSymptoms(){
 		List<String> symptoms = reader.GetSymptoms();
 		
 		return symptoms;
@@ -65,7 +31,7 @@ public class AnalyticsCounter {
 	 * @param symptoms a Map variable with the count of symptoms
 	 * Call the method WriteSymptoms from writer attribute 
 	 */
-	public static void writeSymptoms(Map<String,Integer> symptoms) {
+	public void writeSymptoms(Map<String,Integer> symptoms) {
 		writer.WriteSymptoms(symptoms);
 	}
 	/**
@@ -76,7 +42,7 @@ public class AnalyticsCounter {
 	 * 
 	 * @return a Map variable with all the symptoms counted
 	 */
-	public static Map<String,Integer> countSymptoms(List<String> symptoms) {
+	public Map<String,Integer> countSymptoms(List<String> symptoms) {
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		
 		for (String symptom : symptoms) {
@@ -94,7 +60,7 @@ public class AnalyticsCounter {
 	 * @param symptoms Map of all symptoms counted
 	 * @return a Map variable with symptoms in alphabetic order
 	 */
-	public static Map<String,Integer> sortSymptoms(Map<String,Integer> symptoms) {
+	public Map<String,Integer> sortSymptoms(Map<String,Integer> symptoms) {
 		Map<String,Integer> sortMap = new TreeMap<String,Integer>(symptoms);
 		
 		return sortMap;
