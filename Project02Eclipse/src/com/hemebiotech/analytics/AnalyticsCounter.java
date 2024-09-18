@@ -1,58 +1,61 @@
 package com.hemebiotech.analytics; 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.TreeMap;
 
 public class AnalyticsCounter {
+	
+	private ISymptomReader reader;
+	private ISymptomWriter writer; 
 
-	private static void incrementSymptoms (final String symptom, Map<String, Integer> symptoms) {
-		int quantity = 1 ;
-		if(symptoms.containsKey(symptom)) 
-			quantity = symptoms.get(symptom) + 1;
-		symptoms.put(symptom, quantity);
-	}
-
-	public static void main(String args[]) {
-		try {
-			BufferedReader reader = new BufferedReader (new FileReader("symptoms.txt"));
-			WriteSymptomDataToFile resultToFile = new WriteSymptomDataToFile ("result.out") ;
-			Map<String, Integer> symptomsOccurrences = new HashMap<String, Integer>();
-			String line;
-			int cptLine = 0;
-			
-			while ((line = reader.readLine()) != null) {
-				cptLine++ ;
-				System.out.println("ligne " + cptLine + " : " + line);
-				if (line.equals("headache"))
-					incrementSymptoms ("headache", symptomsOccurrences) ;
-				else if (line.equals("rash")) 
-					incrementSymptoms ("rash", symptomsOccurrences) ;
-				else if (line.contains("dialated pupils")) 
-					incrementSymptoms ("dialated pupils", symptomsOccurrences) ;
-			}
-			reader.close () ;
-			
-			// generate output
-			resultToFile.WriteSymptoms (symptomsOccurrences);
-			System.out.println ("traitement terminé");
-		
-		} catch (FileNotFoundException e) {
-			System.out.println("Le fichier à lire est inexistant : " + e.getMessage ());
-		} catch (IOException e) {
-			System.out.println("Erreur de lecture du fichier : " + e.getMessage());
-		// For the moment, i prefer to manage this type of internal error in the general case.              
-		// } catch (IllegalArgumentException e) {
-		//	System.out.println(e.getMessage());
-		} catch (Exception e) {
-			System.out.println("Erreur inattendue : " + e.getMessage());
-			// for debugging if necessary
-			// e.printStackTrace();
-		}
+	/**
+     * reads a list of symptoms from a file then writes to a file the number of occurrences for each symptom.
+	 * @param the file to read, the file to write.
+	 */
+	public AnalyticsCounter(final ISymptomReader reader, final ISymptomWriter writer) {
+		this.reader = reader;
+		this.writer = writer;
 	}
 	
+	/**
+	 * count the occurrences of each symptom.
+	 * @param raw listing of all Symptoms, duplicates are possible/probable.
+	 * @return a Map collection containing the name of the symptom and its occurrence. 
+	 */
+	public Map<String, Integer> countSymptoms(final List<String> symptoms) {
+		Map<String, Integer> result = new HashMap<String, Integer>();
+		
+		for(String symptom : symptoms) 
+			result.put(symptom, result.getOrDefault(symptom, 0) + 1); // if quantity not exist or exist, we add 1.
+
+		return result ;
+	}
+
+	/**
+	 * sorts the list of symptoms and occurrences alphabetically.
+	 * @param a Map collection containing the name of the symptom and its occurrence.
+	 * @return a Map collection sorted list.
+	 */
+ 	public Map<String, Integer> sortSymptoms(final Map<String, Integer> symptoms) { 
+ 	
+		// Convert to TreeMap to sort by key.
+		TreeMap<String, Integer> result = new TreeMap<>(symptoms);		
+		
+		return result;
+	}	
+	
+
+	/**
+	 * processing to be launched for analysis.
+	 */
+	public void treatment () {
+		List<String> symptoms = reader.GetSymptoms();
+		Map<String, Integer> symptoms_occurences = countSymptoms (symptoms);
+		symptoms_occurences = sortSymptoms (symptoms_occurences);
+		// generate output
+		writer.WriteSymptoms(symptoms_occurences);
+	}
 }
 
