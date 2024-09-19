@@ -36,7 +36,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 				result.add(line);
 			}
 			reader.close();
-			
+
 		} catch (FileNotFoundException e) {
 			System.out.println("Unable to read source file : " + e.getMessage ());
 		} catch (IOException e) {
