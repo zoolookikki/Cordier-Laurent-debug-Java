@@ -7,9 +7,12 @@ import java.util.TreeMap;
 
 /**
  * Count the number of occurrences for each symptom.
- * input : a file containing a list of symptom labels
+ * 
+ * input : a file containing a list of symptom labels.
  * output : a file containing for each symptom its occurrences for example "symptoms 1: 3" 
  * 
+ * @author Cordier Laurent
+ * @version 1.0
  */
 public class AnalyticsCounter {
 	
@@ -17,7 +20,8 @@ public class AnalyticsCounter {
 	private ISymptomWriter writer; 
 
 	/**
-     * reads a list of symptoms from a file then writes to a file the number of occurrences for each symptom.
+	 * Reads a list of symptoms from a file then writes to a file the number of occurrences for each symptom.
+	 * 
 	 * @param reader The file to read.
 	 * @param writer The file to write.
 	 */
@@ -27,7 +31,8 @@ public class AnalyticsCounter {
 	}
 	
 	/**
-	 * count the occurrences of each symptom.
+	 * Count the occurrences of each symptom.
+	 * 
 	 * @param symptoms Raw listing of all Symptoms, duplicates are possible/probable.
 	 * @return A Map collection containing the name of the symptom and its occurrence. 
 	 */
@@ -41,11 +46,11 @@ public class AnalyticsCounter {
 	}
 
 	/**
-	 * sorts the list of symptoms and occurrences alphabetically.
+	 * Sorts the list of symptoms and occurrences alphabetically.
+	 * 
 	 * @param symptoms A Map collection containing the name of the symptom and its occurrence.
 	 * @return A Map collection sorted list.
 	 */
-	/* test : à supprimer si TreeMap depuis le début */
  	public Map<String, Integer> sortSymptoms(final Map<String, Integer> symptoms) { 
  	
 		// Convert to TreeMap to sort by key.

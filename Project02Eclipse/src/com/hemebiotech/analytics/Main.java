@@ -1,7 +1,18 @@
 package com.hemebiotech.analytics;
 
+/**
+ * AnalyticsCounter class test.
+ * 
+ * @author Cordier Laurent
+ * @version 1.0
+ */
 public class Main {
 	
+	/**
+	 * Main entry point of the application/
+	 * 
+	 * @param args The command line arguments passed to the program. Not used.
+	 */
 	public static void main(String args[]) {
 		
 		try {
@@ -16,7 +27,7 @@ public class Main {
 			 * - sorts the list of symptoms and occurrences alphabetically.
 			 * - writes the result to the output file.
 			 */
-			writer.WriteSymptoms(analysis.sortSymptoms(analysis.countSymptoms(reader.GetSymptoms())));
+			writer.writeSymptoms(analysis.sortSymptoms(analysis.countSymptoms(reader.getSymptoms())));
 			
 			System.out.println ("treatment completed");
 			

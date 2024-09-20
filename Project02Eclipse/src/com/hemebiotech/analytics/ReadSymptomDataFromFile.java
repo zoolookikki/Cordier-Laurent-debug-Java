@@ -7,13 +7,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Anything that will read symptom data from a source.
+ * 
+ * @author Cordier Laurent
+ * @version 1.0
+ * 
+ */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
 	private String filepath = null;
 	
 	/**
 	 * Each line of the file is composed of a character string which is the name of a symptom.
+	 * 
 	 * @param filepath a full or partial path to file.
+	 * @throws IllegalArgumentException if filepath is null
 	 */
 	public ReadSymptomDataFromFile (final String filepath) {
 		if (filepath == null)
@@ -21,8 +30,11 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		this.filepath = filepath;
 	}
 	
+	/**
+	 * Implementation of the method to obtain a list of all symptoms.
+	 */
 	@Override
-	public List<String> GetSymptoms() {
+	public List<String> getSymptoms() {
 		ArrayList<String> result = new ArrayList<String>();
 	
 		try {

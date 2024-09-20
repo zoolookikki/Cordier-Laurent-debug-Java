@@ -6,13 +6,22 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Map;
 
+/**
+ * Anything that will write symptom data to a destination.
+ * 
+ * @author Cordier Laurent
+ * @version 1.0
+ * 
+ */
 public class  WriteSymptomDataToFile implements ISymptomWriter {
 	
 	private String filepath = null;
 	
 	/**
-	 * each line of the file is composed of a symptom name and its occurrence.
+	 * Each line of the file is composed of a symptom name and its occurrence.
+	 * 
 	 * @param filepath a full or partial path to file.
+	 * @throws IllegalArgumentException if filepath is null
 	 */
 	public WriteSymptomDataToFile (final String filepath) {
 		if (filepath == null)
@@ -20,8 +29,11 @@ public class  WriteSymptomDataToFile implements ISymptomWriter {
 		this.filepath = filepath;
 	}
 	
+	/**
+	 * Implementation of the method to write symptom data to a destination
+	 */
 	@Override
-	public void WriteSymptoms(final Map<String, Integer> symptoms) {
+	public void writeSymptoms(final Map<String, Integer> symptoms) {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter (filepath));
 			for (Map.Entry<String, Integer> entry : symptoms.entrySet()) {
