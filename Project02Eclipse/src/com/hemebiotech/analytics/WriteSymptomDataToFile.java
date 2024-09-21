@@ -10,7 +10,7 @@ import java.util.Map;
  * Anything that will write symptom data to a destination.
  * 
  * @author Cordier Laurent
- * @version 1.0
+ * @version 1.1
  * 
  */
 public class  WriteSymptomDataToFile implements ISymptomWriter {
@@ -34,11 +34,12 @@ public class  WriteSymptomDataToFile implements ISymptomWriter {
 	 */
 	@Override
 	public void writeSymptoms(final Map<String, Integer> symptoms) {
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter (filepath));
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter (filepath))) {
 			for (Map.Entry<String, Integer> entry : symptoms.entrySet()) {
 				writer.write (entry.getKey() + ": " + entry.getValue() + "\n");				
-			}			
+			}
+// test			
+//			System.exit(1); // to simulate an interruption.
 			writer.close();
  		} catch (FileNotFoundException e) {
 			System.out.println("Unable to write result : " + e.getMessage ());

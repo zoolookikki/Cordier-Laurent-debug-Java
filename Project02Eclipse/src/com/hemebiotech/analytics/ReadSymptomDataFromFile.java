@@ -11,7 +11,7 @@ import java.util.List;
  * Anything that will read symptom data from a source.
  * 
  * @author Cordier Laurent
- * @version 1.0
+ * @version 1.1
  * 
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
@@ -37,8 +37,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	public List<String> getSymptoms() {
 		ArrayList<String> result = new ArrayList<String>();
 	
-		try {
-			BufferedReader reader = new BufferedReader (new FileReader(filepath));
+		try (BufferedReader reader = new BufferedReader (new FileReader(filepath))) {
 			String line;
 			int cptLine = 0;
 			
