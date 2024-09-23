@@ -38,8 +38,6 @@ public class  WriteSymptomDataToFile implements ISymptomWriter {
 			for (Map.Entry<String, Integer> entry : symptoms.entrySet()) {
 				writer.write (entry.getKey() + ": " + entry.getValue() + "\n");				
 			}
-// test			
-//			System.exit(1); // to simulate an interruption.
 			writer.close();
  		} catch (FileNotFoundException e) {
 			System.out.println("Unable to write result : " + e.getMessage ());
