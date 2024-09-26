@@ -25,7 +25,7 @@ public class AnalyticsCounter {
 	 * @param sourceFileName The file string to read.
 	 * @param destinationFileName The file string to write.
 	 */
-	public AnalyticsCounter(final String sourceFileName, final String destinationFileName) {
+	public AnalyticsCounter(String sourceFileName, String destinationFileName) {
 		reader = new ReadSymptomDataFromFile(sourceFileName);
 		writer = new WriteSymptomDataToFile(destinationFileName);
 		result = new TreeMap<String, Integer>();

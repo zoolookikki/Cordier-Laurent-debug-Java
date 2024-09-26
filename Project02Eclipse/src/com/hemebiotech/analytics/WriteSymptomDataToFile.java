@@ -23,7 +23,7 @@ public class  WriteSymptomDataToFile implements ISymptomWriter {
 	 * @param filepath a full or partial path to file.
 	 * @throws IllegalArgumentException if filepath is null
 	 */
-	public WriteSymptomDataToFile (final String filepath) {
+	public WriteSymptomDataToFile (String filepath) {
 		if (filepath == null)
 			throw new IllegalArgumentException("Incorrect result file name");
 		this.filepath = filepath;
@@ -33,7 +33,7 @@ public class  WriteSymptomDataToFile implements ISymptomWriter {
 	 * Implementation of the method to write symptom data to a destination
 	 */
 	@Override
-	public void writeSymptoms(final Map<String, Integer> symptoms) {
+	public void writeSymptoms(Map<String, Integer> symptoms) {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter (filepath))) {
 			for (Map.Entry<String, Integer> entry : symptoms.entrySet()) {
 				writer.write (entry.getKey() + ": " + entry.getValue() + "\n");				

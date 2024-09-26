@@ -24,7 +24,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	 * @param filepath a full or partial path to file.
 	 * @throws IllegalArgumentException if filepath is null
 	 */
-	public ReadSymptomDataFromFile (final String filepath) {
+	public ReadSymptomDataFromFile (String filepath) {
 		if (filepath == null)
 			throw new IllegalArgumentException("Incorrect source file name");
 		this.filepath = filepath;
