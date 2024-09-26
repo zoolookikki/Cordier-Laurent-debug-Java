@@ -23,7 +23,7 @@ public class  WriteSymptomDataToFile implements ISymptomWriter {
 	 * @param filepath a full or partial path to file.
 	 * @throws IllegalArgumentException if filepath is null
 	 */
-	public WriteSymptomDataToFile (final String filepath) {
+	public WriteSymptomDataToFile (String filepath) {
 		if (filepath == null)
 			throw new IllegalArgumentException("Incorrect result file name");
 		this.filepath = filepath;

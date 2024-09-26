@@ -25,7 +25,7 @@ public class AnalyticsCounter {
 	 * @param reader The file to read.
 	 * @param writer The file to write.
 	 */
-	public AnalyticsCounter(final ISymptomReader reader, final ISymptomWriter writer) {
+	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
 		this.reader = reader;
 		this.writer = writer;
 	}
@@ -36,7 +36,7 @@ public class AnalyticsCounter {
 	 * @param symptoms Raw listing of all Symptoms, duplicates are possible/probable.
 	 * @return A Map collection containing the name of the symptom and its occurrence. 
 	 */
-	public Map<String, Integer> countSymptoms(final List<String> symptoms) {
+	public Map<String, Integer> countSymptoms(List<String> symptoms) {
 		Map<String, Integer> result = new HashMap<String, Integer>();
 		
 		for(String symptom : symptoms) 
@@ -51,7 +51,7 @@ public class AnalyticsCounter {
 	 * @param symptoms A Map collection containing the name of the symptom and its occurrence.
 	 * @return A Map collection sorted list.
 	 */
- 	public Map<String, Integer> sortSymptoms(final Map<String, Integer> symptoms) { 
+ 	public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms) { 
  	
 		// Convert to TreeMap to sort by key.
 		TreeMap<String, Integer> result = new TreeMap<>(symptoms);		
