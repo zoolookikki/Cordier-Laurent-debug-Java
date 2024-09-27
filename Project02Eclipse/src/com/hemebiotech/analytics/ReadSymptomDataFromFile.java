@@ -50,8 +50,10 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 
 		} catch (FileNotFoundException e) {
 			System.out.println("Unable to read source file : " + e.getMessage ());
+			System.exit(1);
 		} catch (IOException e) {
 			System.out.println("Error reading file : " + e.getMessage());
+			System.exit(2);
 		}
 		
 		return result;

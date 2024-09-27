@@ -41,8 +41,10 @@ public class  WriteSymptomDataToFile implements ISymptomWriter {
 			writer.close();
  		} catch (FileNotFoundException e) {
 			System.out.println("Unable to write result : " + e.getMessage ());
+			System.exit(3);
 		} catch (IOException e) {
 			System.out.println("File write error : " + e.getMessage());
+			System.exit(4);
 		}
 	}
 
